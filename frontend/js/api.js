@@ -2,7 +2,7 @@
    Configuração central da API. Se o endereço do backend mudar
    (ex: for rodar em outro servidor no futuro), só muda aqui.
    =================================================================== */
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = "https://presentation-letter-system.onrender.com";
 
 /* ===================================================================
    Armazenamento do token de acesso.
@@ -35,6 +35,9 @@ async function login(username, password) {
   const body = new URLSearchParams();
   body.append("username", username);
   body.append("password", password);
+
+  console.log("API_BASE_URL:", API_BASE_URL);
+  console.log("LOGIN URL:", `${API_BASE_URL}/auth/login`);
 
   const response = await fetch(`${API_BASE_URL}/auth/login`, {
     method: "POST",
