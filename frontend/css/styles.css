@@ -1,0 +1,1090 @@
+:root {
+  --color-primary: #07549a;
+  --color-primary-dark: #063e73;
+  --color-primary-light: #0d68b8;
+  --color-accent: #ff7900;
+  --color-background: #eef2f6;
+  --color-card: #ffffff;
+  --color-text: #16233f;
+  --color-text-muted: #6f7b8d;
+  --color-border: #d8dee7;
+  --color-success: #1fa463;
+  --color-danger: #d63c3c;
+
+  --radius-card: 16px;
+  --radius-input: 9px;
+  --radius-button: 28px;
+
+  --shadow-card: 0 8px 24px rgba(23, 47, 77, 0.10);
+
+  --font-base:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+
+/* ==========================================================
+   RESET
+   ========================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  font-family: var(--font-base);
+  background: #dfe5eb;
+  color: var(--color-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+
+/* ==========================================================
+   CONTAINER PRINCIPAL
+   ========================================================== */
+
+.app-container {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  background: #f7f9fb;
+
+  position: relative;
+
+  padding-bottom: 86px;
+
+  overflow-x: hidden;
+}
+
+
+/* ==========================================================
+   CABEÇALHO PRINCIPAL
+   ========================================================== */
+
+.greeting-header {
+  min-height: 124px;
+
+  padding: 28px 18px 42px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0a4f91 0%,
+      #07549a 100%
+    );
+
+  color: #fff;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+
+/* ==========================================================
+   CURVA INFERIOR DO CABEÇALHO
+   ========================================================== */
+
+.greeting-header::after {
+  content: "";
+
+  position: absolute;
+
+  left: -3%;
+  right: -3%;
+
+  bottom: -28px;
+
+  height: 58px;
+
+  background: #f7f9fb;
+
+  border-radius:
+    50% 50% 0 0 /
+    100% 100% 0 0;
+}
+
+
+/* ==========================================================
+   INFORMAÇÕES DO USUÁRIO
+   ========================================================== */
+
+.greeting-header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* ==========================================================
+   AVATAR
+   ========================================================== */
+
+.greeting-header .avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  color: var(--color-primary);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 800;
+  font-size: 0.78rem;
+
+  position: relative;
+
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, .12);
+}
+
+
+/* ==========================================================
+   INDICADOR ONLINE
+   ========================================================== */
+
+.greeting-header .avatar::after {
+  content: "";
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #25c46b;
+
+  border: 2px solid #0a4f91;
+
+  position: absolute;
+
+  right: -1px;
+  bottom: 0;
+}
+
+
+/* ==========================================================
+   TEXTO DE SAUDAÇÃO
+   ========================================================== */
+
+.greeting-header .greeting-text {
+  font-size: 0.75rem;
+
+  opacity: .92;
+
+  margin-bottom: 1px;
+}
+
+.greeting-header .greeting-name {
+  font-size: 1.02rem;
+
+  font-weight: 800;
+}
+
+
+/* ==========================================================
+   ÁREA DO BOTÃO SAIR
+   ========================================================== */
+
+.greeting-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* ==========================================================
+   BOTÃO "SAIR"
+
+   IMPORTANTE:
+   Não possui aparência de botão.
+   É somente um texto clicável.
+   ========================================================== */
+
+.greeting-actions .logout-text {
+  appearance: none;
+  -webkit-appearance: none;
+
+  display: inline;
+
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  border-width: 0;
+  border-style: none;
+
+  border-radius: 0;
+
+  background: none;
+  background-color: transparent;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+
+  line-height: 1.2;
+
+  letter-spacing: 0;
+
+  cursor: pointer;
+
+  box-shadow: none;
+
+  outline: none;
+
+  text-decoration: none;
+
+  transition:
+    color .15s ease,
+    opacity .15s ease;
+}
+
+
+/* ==========================================================
+   HOVER
+   ========================================================== */
+
+.greeting-actions .logout-text:hover {
+  background: none;
+  background-color: transparent;
+
+  color: #ffffff;
+
+  opacity: 0.8;
+
+  box-shadow: none;
+
+  outline: none;
+}
+
+
+/* ==========================================================
+   FOCUS
+   ========================================================== */
+
+.greeting-actions .logout-text:focus {
+  background: none;
+  background-color: transparent;
+
+  box-shadow: none;
+
+  outline: none;
+}
+
+
+/* ==========================================================
+   FOCUS VISIBLE
+   ========================================================== */
+
+.greeting-actions .logout-text:focus-visible {
+  background: none;
+  background-color: transparent;
+
+  box-shadow: none;
+
+  outline: none;
+}
+
+
+/* ==========================================================
+   ACTIVE
+   ========================================================== */
+
+.greeting-actions .logout-text:active {
+  background: none;
+  background-color: transparent;
+
+  box-shadow: none;
+
+  outline: none;
+
+  transform: none;
+}
+
+
+/* ==========================================================
+   ÁREA PRINCIPAL
+   ========================================================== */
+
+.screen {
+  padding: 0 16px 26px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* ==========================================================
+   TÍTULO DA HOME
+   ========================================================== */
+
+.home-title {
+  margin: 4px 10px 22px;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.home-title h1 {
+  max-width: 280px;
+
+  font-size: 1.72rem;
+
+  line-height: 1.2;
+
+  letter-spacing: -.03em;
+
+  color: var(--color-text);
+
+  font-weight: 800;
+}
+
+.home-illustration {
+  width: 88px;
+  height: 72px;
+
+  opacity: .35;
+
+  margin-top: -5px;
+}
+
+
+/* ==========================================================
+   CARDS
+   ========================================================== */
+
+.card {
+  background: var(--color-card);
+
+  border-radius: var(--radius-card);
+
+  box-shadow: var(--shadow-card);
+
+  padding: 20px;
+
+  margin-bottom: 16px;
+}
+
+.home-form-card {
+  padding: 18px 16px 16px;
+}
+
+
+/* ==========================================================
+   LABELS
+   ========================================================== */
+
+.section-label {
+  font-size: .82rem;
+
+  font-weight: 800;
+
+  color: var(--color-text);
+
+  letter-spacing: .02em;
+
+  margin-bottom: 13px;
+}
+
+.field {
+  margin-bottom: 14px;
+}
+
+.field-label {
+  display: block;
+
+  font-size: .72rem;
+
+  font-weight: 700;
+
+  color: var(--color-text-muted);
+
+  margin-bottom: 6px;
+}
+
+
+/* ==========================================================
+   INPUTS
+   ========================================================== */
+
+.input {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 12px 14px;
+
+  border:
+    1.5px solid
+    var(--color-border);
+
+  border-radius: var(--radius-input);
+
+  font-size: .94rem;
+
+  color: var(--color-text);
+
+  background: #fff;
+
+  transition:
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+.input:focus {
+  outline: none;
+
+  border-color: var(--color-primary);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(7, 84, 154, .10);
+}
+
+.input[type="date"] {
+  color-scheme: light;
+
+  cursor: pointer;
+}
+
+.input.input-valid {
+  border-color: var(--color-success);
+}
+
+.input.input-error {
+  border-color: var(--color-danger);
+}
+
+.field-error {
+  font-size: .78rem;
+
+  color: var(--color-danger);
+
+  margin-top: 4px;
+}
+
+
+/* ==========================================================
+   SENHA
+   ========================================================== */
+
+.password-field {
+  position: relative;
+}
+
+.password-field .input {
+  padding-right: 48px;
+}
+
+.password-toggle {
+  position: absolute;
+
+  right: 10px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #718096;
+
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  background: #f1f5f9;
+
+  color: var(--color-primary);
+}
+
+.password-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+
+/* ==========================================================
+   TELA DE LOGIN
+   ========================================================== */
+
+.login-page {
+  background: #f7f9fb;
+
+  min-height: 100vh;
+
+  padding-bottom: 86px;
+}
+
+
+/* ==========================================================
+   CABEÇALHO DO LOGIN
+   ========================================================== */
+
+.login-header {
+  background:
+    linear-gradient(
+      180deg,
+      #0a4f91 0%,
+      #07549a 100%
+    );
+
+  min-height: 190px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px 20px 70px;
+
+  color: #ffffff;
+
+  position: relative;
+}
+
+.login-header::after {
+  content: "";
+
+  position: absolute;
+
+  left: -5%;
+  right: -5%;
+
+  bottom: -35px;
+
+  height: 70px;
+
+  background: #f7f9fb;
+
+  border-radius:
+    50% 50% 0 0 /
+    100% 100% 0 0;
+}
+
+.login-header h1 {
+  position: relative;
+
+  z-index: 2;
+
+  font-size: 1.65rem;
+
+  font-weight: 800;
+
+  text-align: center;
+
+  letter-spacing: -0.02em;
+
+  text-transform: uppercase;
+}
+
+
+/* ==========================================================
+   ÁREA PRINCIPAL DO LOGIN
+   ========================================================== */
+
+.login-screen {
+  padding: 30px 16px 26px;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* ==========================================================
+   CARTÃO DO FORMULÁRIO
+   ========================================================== */
+
+.login-screen form {
+  background: #ffffff;
+
+  border-radius: 16px;
+
+  padding: 26px 20px 24px;
+
+  box-shadow:
+    0 8px 24px
+    rgba(23, 47, 77, 0.10);
+}
+
+
+/* ==========================================================
+   INFORMAÇÕES DO LOGIN
+   ========================================================== */
+
+.login-intro {
+  text-align: center;
+
+  margin-bottom: 28px;
+}
+
+.login-intro h2 {
+  font-size: 1.15rem;
+
+  font-weight: 700;
+
+  color: var(--color-text);
+
+  margin-bottom: 9px;
+}
+
+.login-intro h2 span {
+  color: var(--color-primary);
+
+  font-weight: 800;
+}
+
+.login-intro p {
+  font-size: 0.78rem;
+
+  color: var(--color-text-muted);
+
+  line-height: 1.4;
+}
+
+
+/* ==========================================================
+   CAMPOS DO LOGIN
+   ========================================================== */
+
+.login-screen .field {
+  margin-bottom: 18px;
+}
+
+.login-screen .field-label {
+  font-size: 0.76rem;
+
+  color: var(--color-text);
+
+  margin-bottom: 7px;
+}
+
+
+/* ==========================================================
+   ÍCONES DOS CAMPOS
+   ========================================================== */
+
+.input-icon-field,
+.password-field {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+
+  left: 16px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #0a3f69;
+
+  z-index: 2;
+
+  pointer-events: none;
+}
+
+.input-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+
+/* ==========================================================
+   INPUTS DO LOGIN
+   ========================================================== */
+
+.input-icon-field .input,
+.password-field .input {
+  padding-left: 52px;
+}
+
+.login-screen .input {
+  min-height: 54px;
+
+  border-radius: 10px;
+
+  font-size: 0.95rem;
+
+  background: #ffffff;
+}
+
+.login-screen .input::placeholder {
+  color: #8a919a;
+}
+
+
+/* ==========================================================
+   BOTÃO MOSTRAR SENHA
+   ========================================================== */
+
+.password-field .password-toggle {
+  right: 10px;
+}
+
+
+/* ==========================================================
+   BOTÃO LOGIN
+   ========================================================== */
+
+.login-button {
+  margin-top: 10px;
+
+  min-height: 56px;
+
+  font-size: 0.95rem;
+
+  letter-spacing: 0.02em;
+}
+
+.login-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+
+/* ==========================================================
+   RODAPÉ INATIVO NA TELA DE LOGIN
+   ========================================================== */
+
+.login-bottom-nav .nav-item.disabled {
+  color: #a5adb7;
+
+  opacity: 0.65;
+
+  cursor: default;
+
+  pointer-events: none;
+}
+
+.login-bottom-nav .nav-item.disabled svg {
+  color: #a5adb7;
+}
+
+
+/* ==========================================================
+   BOTÕES GERAIS
+   ========================================================== */
+
+.btn {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  width: 100%;
+
+  min-height: 50px;
+
+  padding: 13px 20px;
+
+  border: none;
+
+  border-radius: var(--radius-button);
+
+  font-size: .91rem;
+
+  font-weight: 800;
+
+  letter-spacing: .01em;
+
+  color: #fff;
+
+  cursor: pointer;
+
+  transition:
+    opacity .15s ease,
+    transform .1s ease,
+    background .15s ease;
+}
+
+.btn:active {
+  transform: scale(.985);
+}
+
+.btn:disabled {
+  opacity: .55;
+
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-light);
+}
+
+.btn-accent {
+  background: var(--color-accent);
+}
+
+.btn-accent:hover:not(:disabled) {
+  background: #ed6d00;
+}
+
+.btn svg {
+  width: 22px;
+  height: 22px;
+
+  flex: 0 0 auto;
+}
+
+
+/* ==========================================================
+   AÇÕES DA HOME
+   ========================================================== */
+
+.home-actions {
+  display: grid;
+
+  gap: 12px;
+
+  margin-top: 18px;
+}
+
+.download-button {
+  display: none;
+}
+
+.download-button.visible {
+  display: flex;
+}
+
+
+/* ==========================================================
+   ALERTAS
+   ========================================================== */
+
+.alert {
+  padding: 12px 14px;
+
+  border-radius: var(--radius-input);
+
+  font-size: .85rem;
+
+  margin-bottom: 16px;
+}
+
+.alert-error {
+  background: #fdecec;
+
+  color: var(--color-danger);
+
+  border:
+    1px solid
+    #f5c6c6;
+}
+
+.alert-success {
+  background: #e9f8ef;
+
+  color: var(--color-success);
+
+  border:
+    1px solid
+    #beebce;
+}
+
+
+/* ==========================================================
+   MENU INFERIOR
+   ========================================================== */
+
+.bottom-nav {
+  position: fixed;
+
+  bottom: 0;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  width: 100%;
+
+  max-width: 480px;
+
+  min-height: 76px;
+
+  background:
+    rgba(255, 255, 255, .98);
+
+  border-top:
+    1px solid
+    #e5e9ef;
+
+  display: flex;
+
+  justify-content: space-around;
+
+  padding:
+    8px 4px
+    calc(8px + env(safe-area-inset-bottom));
+
+  z-index: 20;
+}
+
+.nav-item {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 4px;
+
+  text-decoration: none;
+
+  color: #7c8797;
+
+  font-size: .67rem;
+
+  font-weight: 600;
+}
+
+.nav-item.active {
+  color: var(--color-primary);
+}
+
+.nav-item svg {
+  width: 23px;
+  height: 23px;
+}
+
+
+/* ==========================================================
+   OUTROS ELEMENTOS
+   ========================================================== */
+
+.back-link {
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 1.45rem;
+
+  line-height: 1;
+}
+
+.import-description {
+  color: var(--color-text-muted);
+
+  font-size: .88rem;
+
+  line-height: 1.45;
+
+  margin-bottom: 16px;
+}
+
+.import-errors {
+  color: var(--color-danger);
+
+  font-size: .85rem;
+
+  line-height: 1.5;
+
+  padding-left: 18px;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+   ========================================================== */
+
+@media (max-width: 380px) {
+
+  .login-header {
+    min-height: 170px;
+  }
+
+  .login-header h1 {
+    font-size: 1.45rem;
+  }
+
+  .login-screen form {
+    padding: 22px 16px;
+  }
+
+}
+
+
+/* ==========================================================
+   DESKTOP
+   ========================================================== */
+
+@media (min-width: 481px) {
+
+  .app-container {
+    box-shadow:
+      0 0 35px
+      rgba(24, 39, 56, .14);
+  }
+
+}

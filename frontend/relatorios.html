@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatórios — Supervisor Campo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="greeting-header">
+      <div class="user-info">
+        <div class="greeting-name">Relatórios</div>
+      </div>
+      <!--<button id="logout-button" style="background: none; border: none; color: white; cursor: pointer; font-size: 0.8rem;">
+        Sair
+      </button>-->
+    </div>
+
+    <div class="screen">
+      <div id="alert-box"></div>
+
+      <div class="section-label">CARTAS GERADAS</div>
+
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Hoje</span>
+        <span id="report-today" style="font-size: 1.4rem; font-weight: 700; color: var(--color-primary);">--</span>
+      </div>
+
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Esta semana</span>
+        <span id="report-week" style="font-size: 1.4rem; font-weight: 700; color: var(--color-primary);">--</span>
+      </div>
+
+      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
+        <span>Este mês</span>
+        <span id="report-month" style="font-size: 1.4rem; font-weight: 700; color: var(--color-primary);">--</span>
+      </div>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        Home
+      </a>
+      <a href="cartas.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <path d="M14 2v6h6"/>
+        </svg>
+        Cartas
+      </a>
+      <a href="relatorios.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 20V10M12 20V4M6 20v-6"/>
+        </svg>
+        Relatórios
+      </a>
+      <a href="perfil.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 21v-1a8 8 0 0116 0v1"/>
+        </svg>
+        Perfil
+      </a>
+    </nav>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/relatorios.js"></script>
+</body>
+</html>

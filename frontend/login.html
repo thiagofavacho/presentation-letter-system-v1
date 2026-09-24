@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Carta de Apresentação</title>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <div class="app-container login-page">
+
+    <!-- =========================================================
+         CABEÇALHO
+         ========================================================= -->
+    <header class="login-header">
+
+      <h1>Carta de Apresentação</h1>
+
+    </header>
+
+
+    <!-- =========================================================
+         ÁREA PRINCIPAL DO LOGIN
+         ========================================================= -->
+    <main class="screen login-screen">
+      
+      <div class="login-intro">
+
+      <h2>Bem vindo ao <span>LOGIN</span></h2>
+
+      <p>Preencha os dados do login para acessar</p>
+
+      </div>
+
+
+      <div id="alert-box"></div>
+
+      <form id="login-form">
+
+        <!-- =====================================================
+             CPF
+             ===================================================== -->
+        <div class="field">
+  <label class="field-label" for="cpf">Usuário</label>
+
+          <div class="input-icon-field">
+
+            <span class="input-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="8" r="3.5"/>
+                <path d="M5 21c0-4 3-6 7-6s7 2 7 6"/>
+              </svg>
+            </span>
+
+            <input
+              type="text"
+              id="cpf"
+              class="input"
+              placeholder="CPF: 123.456.789-00"
+              inputmode="numeric"
+              autocomplete="username"
+              maxlength="14"
+              required
+            />
+
+          </div>
+        </div>
+
+
+        <!-- =====================================================
+             SENHA
+             ===================================================== -->
+        <div class="field">
+
+          <label class="field-label" for="password">
+            Senha
+          </label>
+
+          <div class="password-field">
+
+            <span class="input-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="4" y="10" width="16" height="10" rx="2"/>
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+            </span>
+
+            <input
+              type="password"
+              id="password"
+              class="input"
+              placeholder="Senha"
+              autocomplete="current-password"
+              required
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              data-password-toggle="password"
+              aria-label="Mostrar senha"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/>
+                <circle cx="12" cy="12" r="2.5"/>
+              </svg>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             BOTÃO LOGIN
+             ===================================================== -->
+        <button
+          type="submit"
+          id="login-button"
+          class="btn btn-primary login-button"
+        >
+          INICIAR
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h13"/>
+            <path d="m13 6 6 6-6 6"/>
+          </svg>
+
+        </button>
+
+      </form>
+
+    </main>
+
+
+    <!-- =========================================================
+         RODAPÉ / MENU INFERIOR
+
+         Na tela de login todos os itens ficam INATIVOS.
+         ========================================================= -->
+    <nav class="bottom-nav login-bottom-nav">
+
+      <a href="#" class="nav-item disabled" aria-disabled="true">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2h-5v-6H10v6H5a2 2 0 0 1-2-2z"/>
+        </svg>
+
+        Home
+
+      </a>
+
+
+      <a href="#" class="nav-item disabled" aria-disabled="true">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <path d="M6 3h9l4 4v14H6z"/>
+          <path d="M14 3v5h5"/>
+          <path d="M9 13h6"/>
+          <path d="M9 17h6"/>
+        </svg>
+
+        Cartas
+
+      </a>
+
+
+      <a href="#" class="nav-item disabled" aria-disabled="true">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+        >
+          <path d="M5 20V10"/>
+          <path d="M12 20V4"/>
+          <path d="M19 20v-7"/>
+        </svg>
+
+        Relatórios
+
+      </a>
+
+
+      <a href="#" class="nav-item disabled" aria-disabled="true">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+        >
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 21a8 8 0 0 1 16 0"/>
+        </svg>
+
+        Perfil
+
+      </a>
+
+    </nav>
+
+  </div>
+
+
+  <script src="js/api.js"></script>
+  <script src="js/login.js"></script>
+
+</body>
+</html>

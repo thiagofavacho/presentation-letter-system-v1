@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerar Carta</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="greeting-header">
+      <div class="user-info">
+        <div class="avatar" id="user-avatar">--</div>
+        <div>
+          <div class="greeting-text">Olá,</div>
+          <div class="greeting-name" id="user-name">Carregando...</div>
+        </div>
+      </div>
+      <div class="greeting-actions">
+
+        <button
+          type="button"
+          class="logout-text"
+          aria-label="Sair"
+          onclick="logout()"
+        >
+          Sair          
+        </button>
+
+      </div>
+
+    </header>
+
+    <main class="screen">
+      <div class="home-title">
+        <h1>Gerar Carta de<br />Apresentação</h1>
+        <svg class="home-illustration" viewBox="0 0 120 90" fill="none" aria-hidden="true">
+          <rect x="45" y="16" width="51" height="58" rx="5" stroke="#aab7c8" stroke-width="2"/>
+          <path d="M55 30h31M55 40h25M55 50h30M55 60h18" stroke="#aab7c8" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="61" cy="12" r="6" stroke="#aab7c8" stroke-width="2"/>
+          <path d="M20 69c0-12 8-20 18-20s18 8 18 20" stroke="#aab7c8" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="38" cy="39" r="8" stroke="#aab7c8" stroke-width="2"/>
+          <path d="M15 75h91" stroke="#aab7c8" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <div id="alert-box"></div>
+
+      <section class="card home-form-card">
+        <div class="section-label">SOLICITAÇÃO DE LOJA</div>
+
+        <div class="field">
+          <label class="field-label" for="promoter-code">CÓDIGO DO PROMOTOR</label>
+          <input type="text" id="promoter-code" class="input" placeholder="Ex.: P12345" required />
+        </div>
+
+        <div class="field">
+          <label class="field-label" for="store-code">CÓDIGO DA LOJA</label>
+          <input type="text" id="store-code" class="input" placeholder="Ex.: L001" required />
+        </div>
+
+        <div class="field" style="margin-bottom: 0;">
+          <label class="field-label" for="letter-date">DATA DA CARTA</label>
+          <input type="date" id="letter-date" class="input" required />
+        </div>
+      </section>
+
+      <div class="home-actions">
+        <button id="generate-button" class="btn btn-primary" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <path d="M14 2v6h6M8 13h8M8 17h5"/>
+          </svg>
+          GERAR
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h13M13 6l6 6-6 6"/>
+          </svg>
+        </button>
+
+        <button id="download-button" class="btn btn-accent download-button" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>
+          </svg>
+          BAIXAR ARQUIVO
+        </button>
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2h-5v-6H10v6H5a2 2 0 0 1-2-2z"/></svg>
+        Home
+      </a>
+      <a href="cartas.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+        Cartas
+      </a>
+      <a href="relatorios.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+        Relatórios
+      </a>
+      <a href="perfil.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+        Perfil
+      </a>
+    </nav>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

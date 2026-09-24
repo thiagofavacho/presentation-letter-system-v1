@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Importar Lojas — Supervisor Campo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-resource="stores" data-label="Lojas">
+  <div class="app-container" style="padding-bottom: 30px;">
+    <div class="greeting-header"><div class="user-info"><a href="perfil.html" style="color:white;text-decoration:none;font-size:1.2rem;margin-right:4px;">‹</a><div class="greeting-name">Importar Lojas</div></div></div>
+    <main class="screen">
+      <div id="alert-box" aria-live="polite"></div>
+      <section class="card">
+        <div class="section-label">ARQUIVO DE LOJAS</div>
+        <p class="import-description">Envie a planilha .xlsx. Códigos existentes serão atualizados; novos códigos serão cadastrados.</p>
+        <form id="import-form">
+          <div class="field"><label class="field-label" for="import-file">Planilha (.xlsx, até 10 MB)</label><input id="import-file" class="input" type="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required /></div>
+          <button id="import-button" class="btn btn-primary" type="submit">Importar planilha</button>
+        </form>
+      </section>
+      <section id="errors-section" class="card" style="display:none;"><div class="section-label">LINHAS A CORRIGIR</div><ul id="errors-list" class="import-errors"></ul></section>
+    </main>
+  </div>
+  <script src="js/api.js"></script><script src="js/admin-import.js"></script>
+</body>
+</html>

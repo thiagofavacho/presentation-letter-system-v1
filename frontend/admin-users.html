@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerenciar Usuários — Supervisor Campo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="app-container" style="padding-bottom: 30px;">
+
+    <div class="greeting-header">
+      <div class="user-info">
+        <a href="perfil.html" style="color: white; text-decoration: none; font-size: 1.2rem; margin-right: 4px;">‹</a>
+        <div class="greeting-name">Gerenciar Usuários</div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div id="alert-box"></div>
+
+      <div class="card">
+        <div class="section-label">NOVO USUÁRIO</div>
+
+        <form id="create-form">
+          <div class="field">
+            <label class="field-label" for="new-name">Nome completo</label>
+            <input type="text" id="new-name" class="input" required />
+          </div>
+          <div class="field">
+            <label class="field-label" for="new-cpf">CPF</label>
+            <input type="text" id="new-cpf" class="input" placeholder="000.000.000-00" maxlength="14" required />
+          </div>
+          <div class="field">
+            <label class="field-label" for="new-username">Usuário</label>
+            <input type="text" id="new-username" class="input" required />
+          </div>
+          <div class="field">
+            <label class="field-label" for="new-password">Senha</label>
+            <div class="password-field">
+            <input type="password" id="new-password" class="input" required />
+            <button type="button" class="password-toggle" data-password-toggle="new-password" aria-label="Mostrar senha">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12z"/>
+                <circle cx="12" cy="12" r="2.5"/>
+              </svg>
+            </button>
+          </div>
+          </div>
+          <div class="field" style="display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" id="new-is-admin" style="width: auto;" />
+            <label for="new-is-admin" style="font-size: 0.85rem;">Este usuário é administrador</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Criar Usuário</button>
+        </form>
+      </div>
+
+      <div class="section-label" style="margin-top: 20px;">USUÁRIOS CADASTRADOS</div>
+      <div id="users-list">
+        <p style="color: var(--color-text-muted); text-align: center; padding: 20px 0;">Carregando...</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin-users.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Perfil — Supervisor Campo</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <div class="app-container">
+
+    <div class="greeting-header">
+      <div class="user-info">
+        <div class="avatar" id="user-avatar">--</div>
+        <div>
+          <div class="greeting-text">Perfil</div>
+          <div class="greeting-name" id="user-name">Carregando...</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="screen">
+      <div id="alert-box"></div>
+
+      <div class="card">
+        <div class="section-label">DADOS DA CONTA</div>
+        <div style="margin-bottom: 10px;">
+          <div class="field-label">Nome</div>
+          <div id="profile-name" style="font-size: 0.95rem;">--</div>
+        </div>
+        <div>
+          <div class="field-label">Usuário</div>
+          <div id="profile-username" style="font-size: 0.95rem;">--</div>
+        </div>
+      </div>
+
+      <!-- Área administrativa: só aparece se o usuário logado for admin.
+           Fica escondida por padrão (display: none) e o JS revela se
+           for o caso. -->
+      <div id="admin-section" style="display: none;">
+        <div class="section-label" style="margin-top: 20px;">ADMINISTRAÇÃO</div>
+
+        <a href="admin-users.html" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--color-text);">
+          <span>Gerenciar Usuários</span>
+          <span>›</span>
+        </a>
+        <a href="admin-promoters.html" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--color-text);">
+          <span>Gerenciar Promotores</span>
+          <span>›</span>
+        </a>
+        <a href="admin-stores.html" class="card" style="display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--color-text);">
+          <span>Gerenciar Lojas</span>
+          <span>›</span>
+        </a>
+      </div>
+
+      <button id="logout-button" class="btn btn-primary" style="margin-top: 20px; background-color: var(--color-danger);">
+        Sair
+      </button>
+    </div>
+
+    <nav class="bottom-nav">
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        </svg>
+        Home
+      </a>
+      <a href="cartas.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+          <path d="M14 2v6h6"/>
+        </svg>
+        Cartas
+      </a>
+      <a href="relatorios.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 20V10M12 20V4M6 20v-6"/>
+        </svg>
+        Relatórios
+      </a>
+      <a href="perfil.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="8" r="4"/>
+          <path d="M4 21v-1a8 8 0 0116 0v1"/>
+        </svg>
+        Perfil
+      </a>
+    </nav>
+
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+</html>
