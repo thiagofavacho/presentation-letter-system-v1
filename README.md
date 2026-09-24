@@ -1,171 +1,199 @@
-Presentation Letter System v1
+# Presentation Letter System
 
-Sistema web para gerenciamento e emissão de cartas de apresentação, desenvolvido com uma API REST em FastAPI e uma interface web em HTML, CSS e JavaScript.
+Sistema web para gerenciamento e geração de cartas de apresentação, desenvolvido com **FastAPI**, **SQLAlchemy**, **PostgreSQL** e frontend em **HTML, CSS e JavaScript puro**.
 
-O sistema possui autenticação de usuários, controle de acesso administrativo, gerenciamento de usuários, gerenciamento de lojas e promotores, geração de cartas em PDF e funcionalidades de consulta e relatórios.
+O sistema permite autenticação de usuários, controle de acesso por perfil, gerenciamento de lojas e promotores, importação de dados, geração de cartas de apresentação em PDF e consulta de relatórios.
 
-📌 Visão geral
+---
+
+## Visão geral
 
 O projeto é dividido em duas partes principais:
 
-Backend: API REST desenvolvida em Python com FastAPI.
-
-Frontend: interface web desenvolvida com HTML, CSS e JavaScript.
+- **Backend:** API REST desenvolvida com FastAPI.
+- **Frontend:** aplicação web desenvolvida com HTML, CSS e JavaScript.
 
 A comunicação entre frontend e backend é realizada através de requisições HTTP utilizando JSON.
 
-A autenticação utiliza JWT (JSON Web Token) e o acesso às funcionalidades administrativas é controlado no backend.
+O sistema possui autenticação baseada em **JWT (JSON Web Token)** e controle de acesso para usuários administradores.
 
-🚀 Funcionalidades
-🔐 Autenticação
+---
 
-O sistema possui autenticação baseada em JWT.
+## Principais funcionalidades
 
-O login é realizado utilizando:
+### Autenticação
 
-CPF
+- Login utilizando CPF e senha.
+- Autenticação baseada em JWT.
+- Controle de sessão do usuário.
+- Validação de usuário ativo.
+- Proteção dos endpoints da API.
+- Controle de acesso administrativo.
 
-Senha
+### Gerenciamento de usuários
 
-O CPF é normalizado antes da consulta ao banco de dados, permitindo formatos como:
+Administradores podem:
 
-123.456.789-00
+- Criar novos usuários.
+- Definir se o usuário é administrador.
+- Editar dados do usuário.
+- Alterar senha.
+- Desativar usuários.
+- Reativar usuários.
+- Consultar usuários cadastrados.
 
+### Gerenciamento de promotores
 
-ou:
+O sistema permite trabalhar com informações de promotores utilizadas no processo de geração das cartas.
 
-12345678900
+### Gerenciamento de lojas
 
+Permite cadastrar e consultar informações relacionadas às lojas.
 
-Após o login, a API retorna um token de acesso que deve ser utilizado nas requisições protegidas.
+### Importação de dados
 
-👤 Gerenciamento de usuários
+O backend possui estrutura para importação de dados utilizados pelo sistema.
 
-Usuários administradores possuem acesso à área administrativa para gerenciamento de usuários.
+### Geração de cartas
 
-É possível:
+O sistema permite gerar cartas de apresentação utilizando os dados cadastrados.
 
-Criar usuários.
+As cartas podem ser geradas em formato PDF através do backend.
 
-Definir nome completo.
+### Relatórios
 
-Definir username.
+O frontend possui uma área de relatórios para consulta das informações disponíveis no sistema.
 
-Definir CPF.
+---
 
-Definir senha.
+# Arquitetura do sistema
 
-Definir se o usuário é administrador.
+A arquitetura simplificada do projeto pode ser representada da seguinte forma:
 
-Editar informações.
+```text
++----------------------+
+|      FRONTEND        |
+|                      |
+| HTML / CSS / JS      |
++----------+-----------+
+           |
+           | HTTP / JSON
+           v
++----------------------+
+|       FASTAPI        |
+|       BACKEND        |
+|                      |
+| REST API             |
++----------+-----------+
+           |
+           +-------------------+
+           |                   |
+           v                   v
++----------------+    +----------------+
+|  PostgreSQL    |    |  PDF Generator |
+|                |    |                |
+| Dados usuários |    | Cartas em PDF  |
+| Lojas          |    +----------------+
+| Promotores     |
++----------------+
+```
 
-Alterar senha.
+---
 
-Desativar usuários.
+# Fluxo de autenticação
 
-Reativar usuários.
+O processo de login funciona da seguinte maneira:
 
-O sistema também realiza validações para evitar:
+```text
++-------------+
+|   Usuário   |
++------+------+
+       |
+       | CPF + senha
+       v
++-------------------+
+| Frontend / Login  |
++---------+---------+
+          |
+          | POST /auth/login
+          v
++-------------------+
+|     FastAPI       |
+|                   |
+| Valida CPF        |
+| Valida senha      |
+| Verifica usuário  |
+| Verifica status   |
++---------+---------+
+          |
+          | Credenciais válidas
+          v
++-------------------+
+|    JWT Token      |
++---------+---------+
+          |
+          | Token
+          v
++-------------------+
+|     Frontend      |
+|                   |
+| Armazena token    |
++---------+---------+
+          |
+          | Requisições autenticadas
+          v
++-------------------+
+|     API REST      |
++-------------------+
+```
 
-CPF duplicado.
+---
 
-Username duplicado.
+# Fluxo de autorização administrativa
 
-CPF com quantidade inválida de dígitos.
+Algumas operações são restritas aos administradores.
 
-As senhas não são armazenadas em texto puro.
-
-👮 Controle de acesso
-
-O sistema possui dois níveis básicos de acesso:
-
-Usuário comum
-
-Pode acessar as funcionalidades disponíveis para usuários autenticados.
-
-Administrador
-
-Possui acesso às funcionalidades administrativas, incluindo gerenciamento de usuários e dados do sistema.
-
-A autorização administrativa é validada no backend, garantindo que a segurança não dependa apenas da interface do frontend.
-
-🏪 Gerenciamento de lojas
-
-A API possui endpoints para gerenciamento das informações relacionadas às lojas utilizadas pelo sistema.
-
-👥 Gerenciamento de promotores
-
-O sistema possui funcionalidades para cadastro e gerenciamento de promotores.
-
-📄 Cartas de apresentação
-
-O sistema permite criar e gerenciar cartas de apresentação utilizando os dados cadastrados na aplicação.
-
-A geração dos documentos em PDF é realizada pelo backend.
-
-Os elementos gráficos utilizados na composição dos documentos ficam em:
-
-backend/app/static/letter_assets/
-
-
-Atualmente, essa pasta contém arquivos como logotipos e carimbos utilizados na geração das cartas.
-
-📊 Relatórios
-
-O frontend possui uma área destinada à consulta e apresentação de informações relacionadas aos dados utilizados pelo sistema.
-
-🏗️ Arquitetura
-
-A arquitetura básica da aplicação pode ser representada da seguinte forma:
-
-+-----------------------+
-|       Frontend        |
-|     HTML / CSS / JS   |
-+-----------+-----------+
-            |
-            | HTTP / JSON
-            v
-+-----------------------+
-|        FastAPI        |
-|        Backend        |
-+-----------+-----------+
-            |
-     +------+------+
-     |             |
-     v             v
-+---------+   +-----------+
-|  Auth   |   |  Regras   |
-|  JWT    |   | de negócio|
-+---------+   +-----------+
+```text
++----------------+
+| Usuário logado |
++-------+--------+
+        |
+        v
++---------------------+
+| JWT válido?         |
++---------+-----------+
+          |
+       +--+--+
+       |     |
+      NÃO    SIM
+       |     |
+       v     v
+    401   +------------------+
+          | É administrador? |
+          +--------+---------+
                    |
-                   v
-            +-------------+
-            | PostgreSQL  |
-            +-------------+
+                +--+--+
+                |     |
+               NÃO    SIM
+                |     |
+                v     v
+              403   Permite
+                    operação
+```
 
-                   |
-                   v
+---
 
-            +-------------+
-            | PDF Reports |
-            |   / Letters |
-            +-------------+
+# Estrutura do projeto
 
-📁 Estrutura do projeto
+A estrutura principal do projeto é:
+
+```text
 presentation-letter-system-v1/
 │
 ├── backend/
+│   │
 │   ├── app/
-│   │   ├── routes/
-│   │   │   ├── auth.py
-│   │   │   ├── letters.py
-│   │   │   ├── promoters.py
-│   │   │   ├── stores.py
-│   │   │   └── users.py
-│   │   │
-│   │   ├── static/
-│   │   │   └── letter_assets/
-│   │   │
+│   │   ├── __init__.py
 │   │   ├── crud.py
 │   │   ├── database.py
 │   │   ├── importers.py
@@ -173,13 +201,28 @@ presentation-letter-system-v1/
 │   │   ├── models.py
 │   │   ├── pdf_generator.py
 │   │   ├── schemas.py
-│   │   └── security.py
+│   │   ├── security.py
+│   │   │
+│   │   ├── routes/
+│   │   │   ├── auth.py
+│   │   │   ├── letters.py
+│   │   │   ├── promoters.py
+│   │   │   ├── stores.py
+│   │   │   └── users.py
+│   │   │
+│   │   └── static/
+│   │       └── letter_assets/
+│   │           ├── carimbo_sb.jpeg
+│   │           ├── logo_ever.png
+│   │           └── logo_tirolez.jpg
 │   │
 │   ├── tests/
-│   ├── README.md
-│   └── create_admin.py
+│   │   └── __init__.py
+│   │
+│   └── README.md
 │
 ├── frontend/
+│   │
 │   ├── css/
 │   │   └── styles.css
 │   │
@@ -202,525 +245,622 @@ presentation-letter-system-v1/
 │   ├── perfil.html
 │   └── relatorios.html
 │
-├── .gitignore
 ├── requirements.txt
-└── README.md
+└── .gitignore
+```
 
+---
 
-Observação: backend/.env, .venv/, arquivos __pycache__ e backend/create_admin.py são mantidos fora do repositório através do .gitignore.
+# Backend
 
-🛠️ Tecnologias utilizadas
-Backend
-Tecnologia	Utilização
-Python	Linguagem principal
-FastAPI	Framework da API REST
-SQLAlchemy	ORM
-PostgreSQL	Banco de dados
-Pydantic	Validação e serialização de dados
-JWT	Autenticação
-bcrypt	Hash de senhas
-Uvicorn	Servidor ASGI
-ReportLab	Geração de PDF
-Frontend
-Tecnologia	Utilização
-HTML5	Estrutura das páginas
-CSS3	Estilização
-JavaScript	Lógica e comunicação com a API
-Fetch API	Comunicação HTTP com o backend
-⚙️ Requisitos
+O backend foi desenvolvido utilizando **Python + FastAPI**.
 
-Para executar o projeto localmente, recomenda-se:
+## Principais componentes
 
-Python 3.11 ou superior
+### `main.py`
 
-PostgreSQL
+É o ponto de entrada da aplicação FastAPI.
 
-Git
+Responsável pela inicialização da API e registro das rotas.
 
-Navegador moderno
+### `database.py`
 
-📥 Instalação
-1. Clonar o repositório
-git clone https://github.com/SEU_USUARIO/presentation-letter-system-v1.git
+Responsável pela configuração da conexão com o banco de dados através do SQLAlchemy.
 
+### `models.py`
+
+Contém os modelos utilizados pelo banco de dados.
+
+### `schemas.py`
+
+Define os schemas Pydantic utilizados para validação dos dados de entrada e saída da API.
+
+### `crud.py`
+
+Concentra operações de criação, consulta, atualização e exclusão de dados.
+
+### `security.py`
+
+Responsável pelos recursos relacionados à segurança, incluindo:
+
+- Hash de senhas.
+- Verificação de senhas.
+- Criação de tokens JWT.
+- Validação de tokens.
+
+### `pdf_generator.py`
+
+Responsável pela geração das cartas em formato PDF.
+
+### `importers.py`
+
+Contém funções relacionadas à importação de dados.
+
+---
+
+# Rotas da API
+
+As principais áreas da API são:
+
+```text
+/auth
+/users
+/stores
+/promoters
+/letters
+```
+
+## Autenticação
+
+```text
+POST /auth/login
+GET  /auth/me
+```
+
+O endpoint de login recebe CPF e senha e retorna um token JWT quando as credenciais são válidas.
+
+---
+
+## Usuários
+
+```text
+POST   /users/
+GET    /users/
+PATCH  /users/{user_id}
+DELETE /users/{user_id}
+```
+
+As operações administrativas são protegidas por autenticação e autorização.
+
+---
+
+## Lojas
+
+As rotas relacionadas às lojas ficam disponíveis através do módulo:
+
+```text
+/routes/stores.py
+```
+
+---
+
+## Promotores
+
+As rotas relacionadas aos promotores ficam disponíveis através do módulo:
+
+```text
+/routes/promoters.py
+```
+
+---
+
+## Cartas
+
+As operações relacionadas às cartas ficam disponíveis através do módulo:
+
+```text
+/routes/letters.py
+```
+
+---
+
+# Banco de dados
+
+O projeto utiliza banco de dados relacional através do SQLAlchemy.
+
+A conexão é configurada através da variável de ambiente:
+
+```text
+DATABASE_URL
+```
+
+Por segurança, o arquivo `.env` **não deve ser versionado no GitHub**.
+
+Exemplo:
+
+```env
+DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco
+SECRET_KEY=sua_chave_secreta
+```
+
+Nunca utilize credenciais reais no README ou no código-fonte versionado.
+
+---
+
+# Segurança
+
+O sistema possui algumas medidas de segurança implementadas:
+
+- Senhas armazenadas através de hash.
+- Autenticação utilizando JWT.
+- Proteção dos endpoints autenticados.
+- Controle de acesso administrativo.
+- Validação de CPF.
+- Verificação de usuário ativo.
+- Variáveis sensíveis armazenadas em `.env`.
+- Arquivos sensíveis ignorados pelo Git.
+
+O arquivo `.env` não deve ser enviado para o repositório.
+
+---
+
+# Requisitos
+
+Para executar o projeto localmente, é necessário ter instalado:
+
+- Python 3.13 ou compatível.
+- Git.
+- PostgreSQL.
+- Visual Studio Code ou outro editor de código.
+- Navegador web.
+
+---
+
+# Instalação
+
+## 1. Clonar o repositório
+
+```bash
+git clone URL_DO_REPOSITORIO
+```
 
 Entrar na pasta:
 
+```bash
 cd presentation-letter-system-v1
+```
 
-2. Criar o ambiente virtual
+---
 
-No Windows PowerShell:
+## 2. Criar ambiente virtual
 
+No Windows:
+
+```powershell
 python -m venv .venv
-
+```
 
 Ativar o ambiente virtual:
 
+```powershell
 .\.venv\Scripts\Activate.ps1
-
+```
 
 Após a ativação, o terminal deverá apresentar algo semelhante a:
 
-(.venv) PS C:\...\presentation-letter-system-v1>
+```text
+(.venv) PS C:\Users\Usuario\presentation-letter-system-v1>
+```
 
-3. Instalar as dependências
+---
+
+## 3. Instalar as dependências
+
+Com o ambiente virtual ativado:
+
+```powershell
 pip install -r requirements.txt
+```
 
-🗄️ Configuração do banco de dados
+---
 
-O backend utiliza PostgreSQL.
+# Configuração do ambiente
 
-É necessário criar um banco de dados para executar a aplicação.
+Dentro da pasta `backend`, criar um arquivo:
 
-Depois, crie o arquivo:
-
+```text
 backend/.env
-
+```
 
 Exemplo:
 
+```env
 DATABASE_URL=postgresql://usuario:senha@localhost:5432/nome_do_banco
-SECRET_KEY=sua_chave_secreta
+SECRET_KEY=uma_chave_secreta_forte
+```
 
-⚠️ Importante
+Os valores devem ser substituídos pelas configurações do ambiente local.
 
-O arquivo .env não deve ser enviado para o GitHub.
+O arquivo `.env` está incluído no `.gitignore` e não deve ser enviado ao GitHub.
 
-Ele contém informações sensíveis utilizadas pela aplicação.
+---
 
-Para compartilhar a estrutura da configuração com outros desenvolvedores, pode ser criado um arquivo:
+# Configuração do banco de dados
 
-backend/.env.example
+Crie um banco PostgreSQL para o projeto.
 
+Exemplo:
 
-com:
+```text
+presentation_letter
+```
 
-DATABASE_URL=
-SECRET_KEY=
+Depois configure a conexão no arquivo:
 
+```text
+backend/.env
+```
 
-Sem inserir credenciais reais.
+Exemplo:
 
-▶️ Executando o backend
+```env
+DATABASE_URL=postgresql://postgres:senha@localhost:5432/presentation_letter
+SECRET_KEY=chave_secreta_para_desenvolvimento
+```
 
-Entre na pasta do backend:
+---
 
+# Executando o backend
+
+Entre na pasta `backend`:
+
+```powershell
 cd backend
-
+```
 
 Com o ambiente virtual ativado, execute:
 
+```powershell
 python -m uvicorn app.main:app --reload
+```
 
+A API ficará disponível em:
 
-Se tudo estiver correto, o servidor será iniciado em:
-
+```text
 http://127.0.0.1:8000
+```
 
+---
 
-A opção --reload faz com que o servidor seja reiniciado automaticamente quando alterações no código forem detectadas.
-
-📚 Documentação da API
+# Documentação da API
 
 O FastAPI disponibiliza automaticamente uma documentação interativa.
 
-Swagger UI
+## Swagger UI
 
-Acesse:
-
+```text
 http://127.0.0.1:8000/docs
+```
 
-ReDoc
+## ReDoc
 
-Também é possível acessar:
-
+```text
 http://127.0.0.1:8000/redoc
+```
 
+Através do Swagger é possível visualizar e testar os endpoints da API.
 
-O Swagger permite visualizar e testar os endpoints diretamente pelo navegador.
+---
 
-🔑 Autenticação
-
-O endpoint de login é:
-
-POST /auth/login
-
-
-O sistema utiliza o padrão OAuth2 Password Flow.
-
-Neste projeto, o campo username utilizado pelo OAuth2 representa o CPF do usuário.
-
-Exemplo:
-
-CPF: 12345678900
-Senha: ********
-
-
-Após uma autenticação bem-sucedida, a API retorna:
-
-{
-  "access_token": "TOKEN",
-  "token_type": "bearer"
-}
-
-
-O token deve ser enviado nas requisições protegidas através do header:
-
-Authorization: Bearer TOKEN
-
-👤 Usuário autenticado
-
-Para consultar os dados do usuário atualmente autenticado:
-
-GET /auth/me
-
-
-Esse endpoint utiliza o token enviado na requisição para identificar o usuário.
-
-👮 Endpoints administrativos
-
-As operações administrativas exigem autenticação e privilégios de administrador.
-
-Usuários
-
-Criar usuário:
-
-POST /users/
-
-
-Listar usuários:
-
-GET /users/
-
-
-Atualizar usuário:
-
-PATCH /users/{user_id}
-
-
-Desativar usuário:
-
-DELETE /users/{user_id}
-
-
-A autorização é realizada no backend.
-
-🧪 Testando a API
-
-Depois de iniciar o backend:
-
-python -m uvicorn app.main:app --reload
-
-
-acesse:
-
-http://127.0.0.1:8000/docs
-
-
-Um fluxo básico de testes é:
-
-Configurar o banco de dados.
-
-Configurar as variáveis de ambiente.
-
-Criar/configurar um usuário administrador.
-
-Executar a API.
-
-Realizar login utilizando CPF e senha.
-
-Obter o access_token.
-
-Autorizar o Swagger.
-
-Consultar /auth/me.
-
-Testar os endpoints protegidos.
-
-Criar e gerenciar usuários.
-
-Testar as funcionalidades de lojas e promotores.
-
-Testar a geração das cartas.
-
-🖥️ Executando o frontend
+# Executando o frontend
 
 O frontend é composto por arquivos HTML, CSS e JavaScript.
 
-A API deve estar executando antes de utilizar as páginas que dependem do backend.
+Estrutura:
 
-Para executar os arquivos estáticos localmente, entre na pasta:
+```text
+frontend/
+├── css/
+├── js/
+└── arquivos HTML
+```
 
+Durante o desenvolvimento, os arquivos podem ser executados através de um servidor HTTP local.
+
+Uma opção simples é utilizar a extensão **Live Server** no Visual Studio Code.
+
+Outra opção é utilizar o servidor HTTP do Python:
+
+```powershell
 cd frontend
-
-
-Execute um servidor HTTP simples:
-
 python -m http.server 5500
+```
 
+Depois acessar:
 
-Depois acesse:
-
+```text
 http://127.0.0.1:5500
+```
 
+---
 
-A forma de servir o frontend pode ser alterada dependendo do ambiente de desenvolvimento ou infraestrutura utilizada.
+# Fluxo completo para testar o sistema
 
-🔐 Segurança
+Depois de configurar o banco, backend e frontend:
 
-O projeto possui algumas medidas básicas de segurança:
+```text
++---------------------------+
+| 1. Iniciar PostgreSQL     |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| 2. Ativar .venv           |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| 3. Iniciar FastAPI        |
+|    porta 8000             |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| 4. Iniciar Frontend       |
+|    porta 5500             |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| 5. Abrir sistema          |
+|    no navegador           |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| 6. Fazer login            |
+|    CPF + senha            |
++-------------+-------------+
+              |
+              v
++---------------------------+
+| 7. Utilizar o sistema     |
++---------------------------+
+```
 
-Autenticação utilizando JWT.
+---
 
-Senhas armazenadas utilizando hash.
+# Criação do usuário administrador
 
-Validação de CPF.
+O projeto possui um script utilizado durante a configuração local:
 
-Verificação de CPF duplicado.
-
-Verificação de username duplicado.
-
-Controle de usuários ativos/inativos.
-
-Controle de acesso administrativo no backend.
-
-Uso de variáveis de ambiente para informações sensíveis.
-
-.env excluído do controle de versão.
-
-Ambiente virtual excluído do Git.
-
-Arquivos compilados do Python excluídos do Git.
-
-O arquivo:
-
+```text
 backend/create_admin.py
+```
 
+Esse arquivo é utilizado para criação inicial de um usuário administrador durante a configuração do ambiente.
 
-também é mantido fora do repositório através do .gitignore.
+Por motivos de segurança, o arquivo está incluído no `.gitignore` e não faz parte do versionamento público do projeto.
 
-🧩 Principais módulos do backend
-main.py
+Caso seja necessário configurar um ambiente de desenvolvimento a partir do repositório, o procedimento de criação do administrador deve ser realizado conforme a configuração local do projeto.
 
-Ponto de entrada da aplicação FastAPI e configuração das rotas.
+---
 
-database.py
+# Organização das responsabilidades
 
-Configuração da conexão com o banco de dados e criação das sessões.
+De forma simplificada:
 
-models.py
+```text
++-------------------+
+|     Frontend      |
+|                   |
+| HTML / CSS / JS   |
++---------+---------+
+          |
+          | HTTP / JSON
+          v
++-------------------+
+|      FastAPI      |
+|                   |
+|      Backend      |
++---------+---------+
+          |
+          +-------------------+
+          |                   |
+          v                   v
++----------------+    +----------------+
+|   SQLAlchemy   |    | PDF Generator  |
++-------+--------+    +-------+--------+
+        |                     |
+        v                     v
++---------------+      +--------------+
+|  PostgreSQL   |      |  Carta PDF   |
++---------------+      +--------------+
+```
 
-Modelos SQLAlchemy utilizados pela aplicação.
+---
 
-schemas.py
+# Fluxo de geração de cartas
 
-Schemas Pydantic utilizados para validação e serialização dos dados.
+O processo de geração de cartas pode ser representado da seguinte forma:
 
-crud.py
+```text
++--------------------+
+| Dados do sistema  |
++---------+----------+
+          |
+          v
++--------------------+
+| Letters Route      |
+| /letters           |
++---------+----------+
+          |
+          v
++--------------------+
+| PDF Generator      |
++---------+----------+
+          |
+          v
++--------------------+
+| Arquivo PDF        |
++--------------------+
+```
 
-Funções responsáveis pelas operações de criação, consulta, atualização e exclusão de registros.
+---
 
-security.py
-
-Funções relacionadas à segurança, incluindo hash/verificação de senhas e tokens JWT.
-
-pdf_generator.py
-
-Responsável pela geração dos documentos PDF.
-
-importers.py
-
-Funções relacionadas à importação de dados.
-
-routes/auth.py
-
-Endpoints relacionados à autenticação e identificação do usuário.
-
-routes/users.py
-
-Endpoints relacionados ao gerenciamento administrativo de usuários.
-
-routes/letters.py
-
-Endpoints relacionados às cartas de apresentação.
-
-routes/promoters.py
-
-Endpoints relacionados aos promotores.
-
-routes/stores.py
-
-Endpoints relacionados às lojas.
-
-🔄 Fluxo básico da aplicação
-Usuário
-   |
-   v
-Frontend
-   |
-   | HTTP / JSON
-   v
-FastAPI
-   |
-   +-------------------+
-   |                   |
-   v                   v
-Autenticação       Regras de negócio
-   |                   |
-   |                   +--------+
-   |                            |
-   v                            v
-JWT                       PostgreSQL
-                                |
-                                v
-                         Dados da aplicação
-                                |
-                                v
-                         Geração de PDF
-
-🔄 Fluxo de autenticação
-+---------+
-| Usuário |
-+----+----+
-     |
-     | CPF + senha
-     v
-+------------+
-|  /auth/    |
-|   login    |
-+-----+------+
-      |
-      v
-+-------------+
-| PostgreSQL  |
-|             |
-| CPF         |
-| senha hash  |
-+------+------+ 
-       |
-       | credenciais válidas
-       v
-+-------------+
-| JWT Token   |
-+------+------+ 
-       |
-       v
-+----------------+
-| Frontend       |
-| guarda token   |
-+-------+--------+
-        |
-        | Authorization: Bearer
-        v
-+----------------+
-| Endpoints      |
-| protegidos     |
-+----------------+
-
-🔄 Fluxo administrativo
-Administrador
-      |
-      v
-    Login
-      |
-      v
-   JWT Token
-      |
-      v
-Endpoint administrativo
-      |
-      v
-require_admin()
-      |
-      +------ Não administrador ------> 403 Forbidden
-      |
-      v
-Administrador autorizado
-      |
-      v
-Operação solicitada
-
-🧑‍💻 Desenvolvimento
+# Desenvolvimento
 
 Durante o desenvolvimento, recomenda-se executar o backend com:
 
+```powershell
 python -m uvicorn app.main:app --reload
+```
 
+O parâmetro `--reload` permite que o servidor seja reiniciado automaticamente quando houver alterações no código.
 
-Após realizar alterações:
+---
 
-git status
+# Git e versionamento
 
-
-Adicionar os arquivos modificados:
-
-git add .
-
-
-Criar um commit:
-
-git commit -m "Descrição da alteração"
-
-
-Enviar para o GitHub:
-
-git push
-
-📌 Arquivos que não devem ser versionados
-
-O projeto utiliza .gitignore para evitar o envio de arquivos locais e informações sensíveis.
+O projeto possui um `.gitignore` configurado para evitar o versionamento de arquivos sensíveis ou desnecessários.
 
 Entre eles:
 
+```text
 .venv/
 .env
+.env.*
 __pycache__/
 *.pyc
 *.db
 *.sqlite
 *.sqlite3
+.vscode/
+.idea/
+*.log
+build/
+dist/
+*.egg-info/
 backend/create_admin.py
+```
 
+Arquivos contendo credenciais, senhas ou chaves secretas nunca devem ser enviados ao repositório.
 
-Antes de realizar um git push, recomenda-se verificar:
+---
 
-git status --short --ignored
+# Estrutura simplificada da aplicação
 
-⚠️ Considerações para produção
+```text
+                    +------------------+
+                    |     USUÁRIO      |
+                    +--------+---------+
+                             |
+                             v
+                    +------------------+
+                    |     FRONTEND     |
+                    |                  |
+                    | HTML / CSS / JS  |
+                    +--------+---------+
+                             |
+                             | HTTP / JSON
+                             v
+                    +------------------+
+                    |      FASTAPI     |
+                    |      BACKEND     |
+                    +--------+---------+
+                             |
+          +------------------+------------------+
+          |                  |                  |
+          v                  v                  v
+     +---------+        +---------+        +---------+
+     |  Auth   |        |  Users  |        | Letters |
+     +---------+        +---------+        +---------+
+          |                  |                  |
+          +------------------+------------------+
+                             |
+                             v
+                    +------------------+
+                    |    SQLAlchemy    |
+                    +--------+---------+
+                             |
+                             v
+                    +------------------+
+                    |    PostgreSQL    |
+                    +------------------+
+```
 
-Este projeto está preparado principalmente para desenvolvimento e testes locais.
+---
 
-Antes de utilizar a aplicação em produção, recomenda-se revisar:
+# Tecnologias utilizadas
 
-HTTPS.
+## Backend
 
-Configuração de CORS.
+- Python
+- FastAPI
+- SQLAlchemy
+- Pydantic
+- PostgreSQL
+- JWT
+- Passlib / bcrypt
+- Uvicorn
+- ReportLab
+- OpenPyXL
 
-Gerenciamento e rotação da SECRET_KEY.
+## Frontend
 
-Expiração e renovação dos tokens.
+- HTML5
+- CSS3
+- JavaScript
 
-Configuração do PostgreSQL.
+## Desenvolvimento
 
-Backup do banco de dados.
+- Git
+- GitHub
+- Visual Studio Code
+- Python Virtual Environment (`venv`)
 
-Logs e monitoramento.
+---
 
-Tratamento de erros.
+# Status do projeto
 
-Gerenciamento de credenciais.
+Projeto em desenvolvimento.
 
-Política de recuperação de senha.
+A estrutura atual contempla:
 
-Permissões de acesso.
+- Autenticação de usuários.
+- Login através de CPF e senha.
+- Controle de acesso administrativo.
+- Gerenciamento de usuários.
+- Gerenciamento de lojas.
+- Gerenciamento de promotores.
+- Importação de dados.
+- Geração de cartas em PDF.
+- Relatórios.
+- Frontend web.
 
-Testes automatizados.
+---
 
-Configuração de servidor ASGI para produção.
+# Observações
 
-📄 Licença
+Este projeto foi desenvolvido inicialmente para execução em ambiente local e pode exigir ajustes de configuração para utilização em produção.
 
-Este projeto não possui uma licença de código aberto definida no momento.
+Antes de realizar um deploy em ambiente produtivo, recomenda-se revisar:
 
-Caso o projeto seja posteriormente disponibilizado como software open source, recomenda-se adicionar uma licença apropriada ao repositório.
+- Configuração de segurança.
+- CORS.
+- Chaves secretas.
+- Configuração do banco de dados.
+- HTTPS.
+- Logs.
+- Controle de permissões.
+- Política de backup.
+- Configuração de ambiente.
+- Processo de criação do usuário administrador.
+
+---
+
+# Licença
+
+Projeto desenvolvido para fins de desenvolvimento e utilização conforme as regras definidas pelo proprietário do projeto.
+
+Copyright © 2026.
