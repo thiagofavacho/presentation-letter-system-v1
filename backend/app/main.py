@@ -16,7 +16,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "const API_BASE_URL = https://presentation-letter-system.onrender.com",
+        "https://presentation-letter-system-frt.onrender.com",
     ],
     allow_credentials=True,
     allow_methods=["*"],
