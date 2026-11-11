@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,30 +15,118 @@
       <div class="user-info">
         <div class="greeting-name">Relatórios</div>
       </div>
-      <!--<button id="logout-button" style="background: none; border: none; color: white; cursor: pointer; font-size: 0.8rem;">
-        Sair
-      </button>-->
     </div>
 
     <div class="screen">
       <div id="alert-box"></div>
 
+
+      <!-- Indicadores -->
       <div class="section-label">CARTAS GERADAS</div>
 
-      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-        <span>Hoje</span>
-        <span id="report-today" style="font-size: 1.4rem; font-weight: 700; color: var(--color-primary);">--</span>
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      ">
+
+        <div class="card" style="margin: 0;">
+          <div style="font-size: 0.9rem;">Hoje</div>
+          <div id="report-today" style="
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 8px;
+          ">--</div>
+        </div>
+
+        <div class="card" style="margin: 0;">
+          <div style="font-size: 0.9rem;">Esta semana</div>
+          <div id="report-week" style="
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 8px;
+          ">--</div>
+        </div>
+
+        <div class="card" style="margin: 0;">
+          <div style="font-size: 0.9rem;">Mês</div>
+          <div id="report-month" style="
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 8px;
+          ">--</div>
+        </div>
+
+        <div class="card" style="margin: 0;">
+          <div style="font-size: 0.9rem;">Ano</div>
+          <div id="report-year" style="
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-top: 8px;
+          ">--</div>
+        </div>
+
       </div>
 
-      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-        <span>Esta semana</span>
-        <span id="report-week" style="font-size: 1.4rem; font-weight: 700; color: var(--color-primary);">--</span>
+      <!-- Histórico -->
+      <div class="section-label" style="margin-top: 24px;">
+        HISTÓRICO DE CARTAS
       </div>
 
-      <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-        <span>Este mês</span>
-        <span id="report-month" style="font-size: 1.4rem; font-weight: 700; color: var(--color-primary);">--</span>
+      <!-- Filtro de período -->
+      <div class="card">
+        <label for="filter-period">Período</label>
+        <select id="filter-period" class="form-control">
+          <option value="all">Todos</option>
+          <option value="today">Hoje</option>
+          <option value="week">Semana</option>
+          <option value="month">Mês</option>
+          <option value="year">Ano</option>
+        </select>
+
+        <!-- Filtro de usuário: exibido somente para administradores -->
+        <div id="user-filter-container" style="display: none; margin-top: 12px;">
+          <label for="filter-user">Usuário</label>
+          <select id="filter-user" class="form-control">
+            <option value="all">Todos os usuários</option>
+          </select>
+        </div>
       </div>
+
+      <!-- Quantidade de registros -->
+      <div style="margin: 12px 4px;">
+        <span id="history-count" style="font-size: 0.85rem; color: var(--color-text-secondary);">
+          Carregando histórico...
+        </span>
+      </div>
+
+      <!-- Tabela de histórico -->
+      <div class="card" style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 10px 8px;">Data</th>
+              <th style="text-align: left; padding: 10px 8px;">Usuário</th>
+              <th style="text-align: left; padding: 10px 8px;">Promotor</th>
+              <th style="text-align: left; padding: 10px 8px;">Matrícula</th>
+              <th style="text-align: left; padding: 10px 8px;">Loja</th>
+            </tr>
+          </thead>
+
+          <tbody id="history-table-body">
+            <tr>
+              <td colspan="5" style="text-align: center; padding: 16px;">
+                Carregando registros...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
     <nav class="bottom-nav">
@@ -47,6 +136,7 @@
         </svg>
         Home
       </a>
+
       <a href="cartas.html" class="nav-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
@@ -54,12 +144,14 @@
         </svg>
         Cartas
       </a>
+
       <a href="relatorios.html" class="nav-item active">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M18 20V10M12 20V4M6 20v-6"/>
         </svg>
         Relatórios
       </a>
+
       <a href="perfil.html" class="nav-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="8" r="4"/>
